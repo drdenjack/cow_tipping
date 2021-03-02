@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue_test</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+        <audio id="mooSound" src="assets/moo.wav"></audio>
+        <div id="app">
+            <h1>Cow Tipping</h1>
+            Fill out the form and tip the cow to calculate your total.<br><br>
+            <hr>
+            <div id=subtotal>Subtotal: $
+                <input v-model="subtotal" size="8"/>
+            </div>
+            <tip-selector @tip-changed="updateTip"></tip-selector>
+            <div id="total">
+                Tip Amount: {{ tipUSD }} <br>
+                Total: {{ totalUSD }} (with {{ tipPct }}% tip)
+            </div>
+            <div id="cow" @mouseover="mouseoverCow" @mouseout="showMouseover = false">
+                <img id="cowImg" src="./assets/cow.png"
+                    @click="clickTheCow"> <!-- @ is the same as v-on: -->
+                <div id=cowTooltip v-show='showMouseover'>Help: {{ mouseoverText }}</div>
+            </div>
+        </div>
+
+        <!-- Import App -->
+        <script type="text/javascript" src="main.js"></script>
+
+        <!-- Import component -->
+        <script type="text/javascript" src="components/tip_selector.js"></script>
+
+        <!-- Mount App -->
+        <script>
+            const mountedApp = app.mount('#app')
+        </script>
+
+    </body>
+</html>
+
+<!--
+    bind  -> :<data> -> :subtotal
+    hover -> @mouseover
+    click -> @click=
+    style -> :style="{ ... }" camelcase inside this style object because it's js, not css
+-->
